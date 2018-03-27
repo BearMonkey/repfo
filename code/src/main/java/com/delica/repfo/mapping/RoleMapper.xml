@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.delica.repfo.dao.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.delica.repfo.domain.Role">
+    <id column="f_id" jdbcType="INTEGER" property="id" />
+    <result column="f_role_name" jdbcType="CHAR" property="roleName" />
+    <result column="f_create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="f_operator" jdbcType="INTEGER" property="operator" />
+    <result column="f_isdel" jdbcType="SMALLINT" property="isdel" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    f_id, f_role_name, f_create_time, f_operator, f_isdel
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_role
+    where f_id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_role
+    where f_id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.delica.repfo.domain.Role">
+    insert into t_role (f_id, f_role_name, f_create_time, 
+      f_operator, f_isdel)
+    values (#{id,jdbcType=INTEGER}, #{roleName,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{operator,jdbcType=INTEGER}, #{isdel,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.delica.repfo.domain.Role">
+    insert into t_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        f_id,
+      </if>
+      <if test="roleName != null">
+        f_role_name,
+      </if>
+      <if test="createTime != null">
+        f_create_time,
+      </if>
+      <if test="operator != null">
+        f_operator,
+      </if>
+      <if test="isdel != null">
+        f_isdel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null">
+        #{isdel,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.delica.repfo.domain.Role">
+    update t_role
+    <set>
+      <if test="roleName != null">
+        f_role_name = #{roleName,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        f_create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        f_operator = #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null">
+        f_isdel = #{isdel,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.delica.repfo.domain.Role">
+    update t_role
+    set f_role_name = #{roleName,jdbcType=CHAR},
+      f_create_time = #{createTime,jdbcType=TIMESTAMP},
+      f_operator = #{operator,jdbcType=INTEGER},
+      f_isdel = #{isdel,jdbcType=SMALLINT}
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.delica.repfo.dao.HospitalMapper">
+  <resultMap id="BaseResultMap" type="com.delica.repfo.domain.Hospital">
+    <id column="f_id" jdbcType="INTEGER" property="id" />
+    <result column="f_name" jdbcType="VARCHAR" property="name" />
+    <result column="f_level" jdbcType="VARCHAR" property="level" />
+    <result column="f_prov_id" jdbcType="INTEGER" property="provId" />
+    <result column="f_city_id" jdbcType="INTEGER" property="cityId" />
+    <result column="f_region_id" jdbcType="INTEGER" property="regionId" />
+    <result column="f_address" jdbcType="VARCHAR" property="address" />
+    <result column="f_liaisons" jdbcType="VARCHAR" property="liaisons" />
+    <result column="f_contact" jdbcType="VARCHAR" property="contact" />
+    <result column="f_isbase" jdbcType="SMALLINT" property="isbase" />
+    <result column="f_create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="f_operator" jdbcType="INTEGER" property="operator" />
+    <result column="f_isdel" jdbcType="SMALLINT" property="isdel" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.delica.repfo.domain.Hospital">
+    <result column="f_about" jdbcType="LONGVARCHAR" property="about" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    f_id, f_name, f_level, f_prov_id, f_city_id, f_region_id, f_address, f_liaisons, 
+    f_contact, f_isbase, f_create_time, f_operator, f_isdel
+  </sql>
+  <sql id="Blob_Column_List">
+    f_about
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_hospital
+    where f_id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_hospital
+    where f_id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.delica.repfo.domain.Hospital">
+    insert into t_hospital (f_id, f_name, f_level, 
+      f_prov_id, f_city_id, f_region_id, 
+      f_address, f_liaisons, f_contact, 
+      f_isbase, f_create_time, f_operator, 
+      f_isdel, f_about)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, 
+      #{provId,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, #{regionId,jdbcType=INTEGER}, 
+      #{address,jdbcType=VARCHAR}, #{liaisons,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, 
+      #{isbase,jdbcType=SMALLINT}, #{createTime,jdbcType=TIMESTAMP}, #{operator,jdbcType=INTEGER}, 
+      #{isdel,jdbcType=SMALLINT}, #{about,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.delica.repfo.domain.Hospital">
+    insert into t_hospital
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        f_id,
+      </if>
+      <if test="name != null">
+        f_name,
+      </if>
+      <if test="level != null">
+        f_level,
+      </if>
+      <if test="provId != null">
+        f_prov_id,
+      </if>
+      <if test="cityId != null">
+        f_city_id,
+      </if>
+      <if test="regionId != null">
+        f_region_id,
+      </if>
+      <if test="address != null">
+        f_address,
+      </if>
+      <if test="liaisons != null">
+        f_liaisons,
+      </if>
+      <if test="contact != null">
+        f_contact,
+      </if>
+      <if test="isbase != null">
+        f_isbase,
+      </if>
+      <if test="createTime != null">
+        f_create_time,
+      </if>
+      <if test="operator != null">
+        f_operator,
+      </if>
+      <if test="isdel != null">
+        f_isdel,
+      </if>
+      <if test="about != null">
+        f_about,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="provId != null">
+        #{provId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null">
+        #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="regionId != null">
+        #{regionId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="liaisons != null">
+        #{liaisons,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null">
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="isbase != null">
+        #{isbase,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null">
+        #{isdel,jdbcType=SMALLINT},
+      </if>
+      <if test="about != null">
+        #{about,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.delica.repfo.domain.Hospital">
+    update t_hospital
+    <set>
+      <if test="name != null">
+        f_name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        f_level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="provId != null">
+        f_prov_id = #{provId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null">
+        f_city_id = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="regionId != null">
+        f_region_id = #{regionId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        f_address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="liaisons != null">
+        f_liaisons = #{liaisons,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null">
+        f_contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="isbase != null">
+        f_isbase = #{isbase,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null">
+        f_create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        f_operator = #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null">
+        f_isdel = #{isdel,jdbcType=SMALLINT},
+      </if>
+      <if test="about != null">
+        f_about = #{about,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.delica.repfo.domain.Hospital">
+    update t_hospital
+    set f_name = #{name,jdbcType=VARCHAR},
+      f_level = #{level,jdbcType=VARCHAR},
+      f_prov_id = #{provId,jdbcType=INTEGER},
+      f_city_id = #{cityId,jdbcType=INTEGER},
+      f_region_id = #{regionId,jdbcType=INTEGER},
+      f_address = #{address,jdbcType=VARCHAR},
+      f_liaisons = #{liaisons,jdbcType=VARCHAR},
+      f_contact = #{contact,jdbcType=VARCHAR},
+      f_isbase = #{isbase,jdbcType=SMALLINT},
+      f_create_time = #{createTime,jdbcType=TIMESTAMP},
+      f_operator = #{operator,jdbcType=INTEGER},
+      f_isdel = #{isdel,jdbcType=SMALLINT},
+      f_about = #{about,jdbcType=LONGVARCHAR}
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.delica.repfo.domain.Hospital">
+    update t_hospital
+    set f_name = #{name,jdbcType=VARCHAR},
+      f_level = #{level,jdbcType=VARCHAR},
+      f_prov_id = #{provId,jdbcType=INTEGER},
+      f_city_id = #{cityId,jdbcType=INTEGER},
+      f_region_id = #{regionId,jdbcType=INTEGER},
+      f_address = #{address,jdbcType=VARCHAR},
+      f_liaisons = #{liaisons,jdbcType=VARCHAR},
+      f_contact = #{contact,jdbcType=VARCHAR},
+      f_isbase = #{isbase,jdbcType=SMALLINT},
+      f_create_time = #{createTime,jdbcType=TIMESTAMP},
+      f_operator = #{operator,jdbcType=INTEGER},
+      f_isdel = #{isdel,jdbcType=SMALLINT}
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

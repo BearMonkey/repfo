@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.delica.repfo.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.delica.repfo.domain.User">
+    <id column="f_id" jdbcType="INTEGER" property="id" />
+    <result column="f_account" jdbcType="CHAR" property="account" />
+    <result column="f_password" jdbcType="CHAR" property="password" />
+    <result column="f_id_card" jdbcType="CHAR" property="idCard" />
+    <result column="f_name" jdbcType="VARCHAR" property="name" />
+    <result column="f_phone" jdbcType="CHAR" property="phone" />
+    <result column="f_create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="f_operator" jdbcType="INTEGER" property="operator" />
+    <result column="f_isdel" jdbcType="SMALLINT" property="isdel" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    f_id, f_account, f_password, f_id_card, f_name, f_phone, f_create_time, f_operator, 
+    f_isdel
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where f_id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_user
+    where f_id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.delica.repfo.domain.User">
+    insert into t_user (f_id, f_account, f_password, 
+      f_id_card, f_name, f_phone, f_create_time, 
+      f_operator, f_isdel)
+    values (#{id,jdbcType=INTEGER}, #{account,jdbcType=CHAR}, #{password,jdbcType=CHAR}, 
+      #{idCard,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{operator,jdbcType=INTEGER}, #{isdel,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.delica.repfo.domain.User">
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        f_id,
+      </if>
+      <if test="account != null">
+        f_account,
+      </if>
+      <if test="password != null">
+        f_password,
+      </if>
+      <if test="idCard != null">
+        f_id_card,
+      </if>
+      <if test="name != null">
+        f_name,
+      </if>
+      <if test="phone != null">
+        f_phone,
+      </if>
+      <if test="createTime != null">
+        f_create_time,
+      </if>
+      <if test="operator != null">
+        f_operator,
+      </if>
+      <if test="isdel != null">
+        f_isdel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=CHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=CHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null">
+        #{isdel,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.delica.repfo.domain.User">
+    update t_user
+    <set>
+      <if test="account != null">
+        f_account = #{account,jdbcType=CHAR},
+      </if>
+      <if test="password != null">
+        f_password = #{password,jdbcType=CHAR},
+      </if>
+      <if test="idCard != null">
+        f_id_card = #{idCard,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        f_name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        f_phone = #{phone,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        f_create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operator != null">
+        f_operator = #{operator,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null">
+        f_isdel = #{isdel,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.delica.repfo.domain.User">
+    update t_user
+    set f_account = #{account,jdbcType=CHAR},
+      f_password = #{password,jdbcType=CHAR},
+      f_id_card = #{idCard,jdbcType=CHAR},
+      f_name = #{name,jdbcType=VARCHAR},
+      f_phone = #{phone,jdbcType=CHAR},
+      f_create_time = #{createTime,jdbcType=TIMESTAMP},
+      f_operator = #{operator,jdbcType=INTEGER},
+      f_isdel = #{isdel,jdbcType=SMALLINT}
+    where f_id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectAllUser" resultMap="BaseResultMap">
+      select * from t_user where f_isdel=0 <if test="size!=null and size!=0">limit<if test="start!=null">#{start},</if>#{size}</if>;
+  </select>
+  
+  
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.delica.repfo.dao.RegionMapper">
+  <resultMap id="BaseResultMap" type="com.delica.repfo.domain.Region">
+    <id column="f_code" jdbcType="INTEGER" property="code" />
+    <result column="f_parent_code" jdbcType="INTEGER" property="parentCode" />
+    <result column="f_type" jdbcType="INTEGER" property="type" />
+    <result column="f_short_name" jdbcType="VARCHAR" property="shortName" />
+    <result column="f_full_name" jdbcType="VARCHAR" property="fullName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    f_code, f_parent_code, f_type, f_short_name, f_full_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_region
+    where f_code = #{code,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_region
+    where f_code = #{code,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.delica.repfo.domain.Region">
+    insert into t_region (f_code, f_parent_code, f_type, 
+      f_short_name, f_full_name)
+    values (#{code,jdbcType=INTEGER}, #{parentCode,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{shortName,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.delica.repfo.domain.Region">
+    insert into t_region
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        f_code,
+      </if>
+      <if test="parentCode != null">
+        f_parent_code,
+      </if>
+      <if test="type != null">
+        f_type,
+      </if>
+      <if test="shortName != null">
+        f_short_name,
+      </if>
+      <if test="fullName != null">
+        f_full_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        #{code,jdbcType=INTEGER},
+      </if>
+      <if test="parentCode != null">
+        #{parentCode,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="shortName != null">
+        #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null">
+        #{fullName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.delica.repfo.domain.Region">
+    update t_region
+    <set>
+      <if test="parentCode != null">
+        f_parent_code = #{parentCode,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        f_type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="shortName != null">
+        f_short_name = #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null">
+        f_full_name = #{fullName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where f_code = #{code,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.delica.repfo.domain.Region">
+    update t_region
+    set f_parent_code = #{parentCode,jdbcType=INTEGER},
+      f_type = #{type,jdbcType=INTEGER},
+      f_short_name = #{shortName,jdbcType=VARCHAR},
+      f_full_name = #{fullName,jdbcType=VARCHAR}
+    where f_code = #{code,jdbcType=INTEGER}
+  </update>
+</mapper>

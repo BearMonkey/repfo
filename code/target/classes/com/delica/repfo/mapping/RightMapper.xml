@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.delica.repfo.dao.RightMapper">
+  <resultMap id="BaseResultMap" type="com.delica.repfo.domain.Right">
+    <id column="f_id" jdbcType="VARCHAR" property="id" />
+    <result column="f_right_name" jdbcType="VARCHAR" property="rightName" />
+    <result column="f_right_alias" jdbcType="VARCHAR" property="rightAlias" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    f_id, f_right_name, f_right_alias
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_right
+    where f_id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_right
+    where f_id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.delica.repfo.domain.Right">
+    insert into t_right (f_id, f_right_name, f_right_alias
+      )
+    values (#{id,jdbcType=VARCHAR}, #{rightName,jdbcType=VARCHAR}, #{rightAlias,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.delica.repfo.domain.Right">
+    insert into t_right
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        f_id,
+      </if>
+      <if test="rightName != null">
+        f_right_name,
+      </if>
+      <if test="rightAlias != null">
+        f_right_alias,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="rightName != null">
+        #{rightName,jdbcType=VARCHAR},
+      </if>
+      <if test="rightAlias != null">
+        #{rightAlias,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.delica.repfo.domain.Right">
+    update t_right
+    <set>
+      <if test="rightName != null">
+        f_right_name = #{rightName,jdbcType=VARCHAR},
+      </if>
+      <if test="rightAlias != null">
+        f_right_alias = #{rightAlias,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where f_id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.delica.repfo.domain.Right">
+    update t_right
+    set f_right_name = #{rightName,jdbcType=VARCHAR},
+      f_right_alias = #{rightAlias,jdbcType=VARCHAR}
+    where f_id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
