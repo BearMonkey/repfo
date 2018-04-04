@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>首页</title>
+    <base target="/repfo">
     <link href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
     <link href="http://apps.bdimg.com/libs/fontawesome/4.4.0/css/font-awesome.min.css">
     <link href="./css/module/index/index.css" />
@@ -15,8 +16,10 @@
         </div>
         <div class="operation">
           <div class="clearfix operation-body">
-            <div class="split-line"><a href="javascript:void(0);" onclick="loginModal('Modal-login')">登录</a></div>
-            <div><a href="javascript:void(0);" onclick="registerModal('Modal-register')">注册</a></div>
+            <!-- <div class="split-line"><a href="javascript:void(0);" onclick="loginModal('Modal-login')">登录</a></div> -->
+            <!-- <div><a href="javascript:void(0);" onclick="registerModal('Modal-register')">注册</a></div> -->
+            <div class="split-line"><a id="a-login-page" href="login">登录</a></div>
+            <div><a id="a-regist-page" href="regist">注册</a></div>
           </div>
         </div>
       </div>
